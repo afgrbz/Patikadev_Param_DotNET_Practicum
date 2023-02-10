@@ -7,5 +7,6 @@
         Task<List<SuperHero>> AddHero(SuperHero hero);
         Task<List<SuperHero>?> UpdateHero(int id, SuperHero request);
         Task<List<SuperHero>?> DeleteHero(int id);
+        Task<List<SuperHero>?> UpdatePartialHero(int id, SuperHero request);
     }
 }

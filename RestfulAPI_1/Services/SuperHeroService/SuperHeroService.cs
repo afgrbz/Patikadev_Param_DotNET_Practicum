@@ -61,5 +61,23 @@
 
             return await _context.SuperHeroes.ToListAsync();
         }
+
+        public async Task<List<SuperHero>?> UpdatePartialHero(int id, SuperHero request )
+        {
+            var hero = await _context.SuperHeroes.FindAsync(id);
+            if (hero == null)
+                return null;
+
+            hero.Name = request.Name;
+            hero.FirstName = request.FirstName;
+            hero.LastName = request.LastName;
+            hero.Place = request.Place;
+
+            await _context.SaveChangesAsync();
+
+
+            return await _context.SuperHeroes.ToListAsync();
+        }
+
     }
 }

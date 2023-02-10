@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using RestfulAPI_1.Services.SuperHeroService;
 
@@ -52,6 +53,16 @@ namespace RestfulAPI_1.Controllers
         public async Task<ActionResult<List<SuperHero>>> DeleteHero(int id)
         {
             var result = await _superHeroService.DeleteHero(id);
+            if (result == null)
+                return NotFound("Hero not found.");
+
+            return Ok(result);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<List<SuperHero>>> UpdatePartialHero(int id, SuperHero request)
+        {
+            var result = await _superHeroService.UpdatePartialHero(id, request);
             if (result == null)
                 return NotFound("Hero not found.");
 
